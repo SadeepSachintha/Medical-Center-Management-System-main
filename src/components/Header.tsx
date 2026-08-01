@@ -36,6 +36,7 @@ export function Header({ currentTab }: HeaderProps) {
       case 'reception-queue': return 'OPD Queue Control & Triage';
       case 'reception-billing': return 'Cashier & Billing Desk';
       case 'doctor-consult': return 'Clinical Consultation Pad (EHR)';
+      case 'doctor-earnings': return 'My Consultation Earnings & Ledger';
       case 'pharmacy-prescriptions': return 'Pharmacy Rx Dispensing Desk';
       case 'pharmacy-inventory': return 'Medication Stock & Inventory Control';
       case 'admin-users': return 'System User Account Setup (RBAC)';

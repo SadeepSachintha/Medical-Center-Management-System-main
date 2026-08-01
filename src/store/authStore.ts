@@ -6,6 +6,9 @@ export interface User {
   username: string;
   role: 'admin' | 'doctor' | 'receptionist' | 'pharmacist';
   specialty: string;
+  roomNumber?: string;
+  consultationFee?: number;
+  bio?: string;
 }
 
 interface AuthState {

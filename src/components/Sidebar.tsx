@@ -38,7 +38,8 @@ export function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
     ],
     doctor: [
       { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
-      { id: 'doctor-consult', name: 'Consultation Pad', icon: Stethoscope }
+      { id: 'doctor-consult', name: 'Consultation Pad', icon: Stethoscope },
+      { id: 'doctor-earnings', name: 'My Earnings', icon: BarChart3 }
     ],
     receptionist: [
       { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },

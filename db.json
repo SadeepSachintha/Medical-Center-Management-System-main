@@ -918,6 +918,30 @@
       "role": "doctor",
       "action": "Call Patient",
       "details": "Called Patient Jane Smith (Token 106) to consult room"
+    },
+    {
+      "id": "l-956647",
+      "timestamp": "2026-08-01T16:54:57.524Z",
+      "username": "admin",
+      "role": "admin",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-748054",
+      "timestamp": "2026-08-01T16:54:57.791Z",
+      "username": "admin",
+      "role": "admin",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-864263",
+      "timestamp": "2026-08-01T17:07:06.167Z",
+      "username": "doctor",
+      "role": "doctor",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
     }
   ]
 }

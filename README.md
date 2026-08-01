@@ -14,7 +14,7 @@ The system operates as a **single-tenant standalone container or local server de
 * **Thermal Receipt Printing (80mm)**: Custom CSS print sheets (`@media print`) format walk-in token slips and payments receipts to match standard 80mm wide thermal roll sizes.
 * **Automated PDF Discharge & Receipt Emails**: Generates itemized Payment Receipts (with barcode graphics) and Clinical Discharge Summaries (vital logs, ICD-10 notes, Rx medication charts, signature lines) on checkout and emails them to patients.
 * **Physician Scheduling & Roster Rules**: Supports weekly active days/hours, consultation room setup, consulting fees, and vacation overrides. Booking is validated in real-time to prevent receptionist scheduling during blocked dates.
-* **Interactive Reporting & Analytics**: Explores multi-tabbed metrics for financial cashflow, payment splits (Cash, Card, **Insurance**, and **QR Code**), hourly peak load hours, and doctor completed consultations.
+* **Interactive Reporting & Analytics**: Explores five interactive tabs for clinic cashflow, payment splits (Cash, Card, **Insurance**, and **QR Code**), patient footfall peak loads, doctor completed consultations, drug stock velocity models, and HIPAA compliance audit log consoles.
 * **Keyboard-Wedge Barcode Scanner Input**: A global keyboard event listener captures high-speed keyboard input sequences (key interval < 45ms) and automatically scans item batch numbers into direct pharmacy sales.
 * **Local Database Backups**: Includes an admin dashboard interface to trigger client-side JSON dumps of `db.json` database state and logs, plus monitoring configurations for nightly container backup crons.
 

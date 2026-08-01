@@ -12,6 +12,7 @@ import { PatientOnboarding } from './pages/Receptionist/PatientOnboarding';
 import { QueueScheduler } from './pages/Receptionist/QueueScheduler';
 import { BillingDesk } from './pages/Receptionist/BillingDesk';
 import { ConsultationPad } from './pages/Doctor/ConsultationPad';
+import { DoctorEarnings } from './pages/Doctor/DoctorEarnings';
 import { PrescriptionQueue } from './pages/Pharmacist/PrescriptionQueue';
 import { InventoryManager } from './pages/Pharmacist/InventoryManager';
 import { UserManagement } from './pages/Admin/UserManagement';
@@ -82,6 +83,8 @@ function MainLayout() {
         return <BillingDesk />;
       case 'doctor-consult':
         return <ConsultationPad />;
+      case 'doctor-earnings':
+        return <DoctorEarnings />;
       case 'pharmacy-prescriptions':
         return <PrescriptionQueue />;
       case 'pharmacy-inventory':
