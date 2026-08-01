@@ -327,7 +327,7 @@
       "tokenNumber": "106",
       "date": "2026-08-01T15:20:00.000Z",
       "type": "walk-in",
-      "status": "in-consultation",
+      "status": "completed",
       "triage": {
         "bp": "122/81",
         "hr": "74",
@@ -456,6 +456,21 @@
       },
       "notes": "Presented with fever and mild sore throat. Throat red, no exudates. Diagnosed with viral pharyngitis. Rest and hydration.",
       "diagnosisCodes": "J02.9 (Acute Pharyngitis, Unspecified)"
+    },
+    {
+      "id": "e-925041",
+      "appointmentId": "a-6",
+      "patientId": "p-2",
+      "doctorId": "u-2",
+      "date": "2026-08-01T17:09:23.272Z",
+      "triage": {
+        "bp": "122/81",
+        "hr": "74",
+        "temp": "98.8",
+        "bmi": "23.0"
+      },
+      "notes": "",
+      "diagnosisCodes": "J06.9 (Acute Upper Respiratory Infection)"
     }
   ],
   "prescriptions": [
@@ -942,6 +957,14 @@
       "role": "doctor",
       "action": "User Login",
       "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-453022",
+      "timestamp": "2026-08-01T17:09:23.274Z",
+      "username": "doctor",
+      "role": "doctor",
+      "action": "Clinical Encounter Logged",
+      "details": "Recorded medical session for patient ID: p-2. Rx added: false"
     }
   ]
 }

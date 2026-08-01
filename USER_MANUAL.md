@@ -72,6 +72,7 @@ Launching the clinic software is simple and does not require opening developers'
 1. On the **Queue Scheduler** table, locate the patient. You will see a flashing orange **"Pending Triage"** notice.
 2. Click **Triage Nurse** next to their name. A form will open.
 3. Enter their vitals (Blood Pressure, Heart Rate, Temperature, BMI).
+   - *Demo Shortcut*: Click the **Mock Vitals** button to instantly autofill the form with standard test values (`122/81 BP`, `74 HR`, `98.8°F Temp`, `23.0 BMI`) in a single click.
 4. Click **Record Vitals**. The flashing warning turns into green badges showing the vitals to the doctor.
 
 ### E. Payments & Billing Desk

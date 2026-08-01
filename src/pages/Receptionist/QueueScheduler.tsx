@@ -411,18 +411,33 @@ export function QueueScheduler() {
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2">
-                  <Button
-                    type="submit"
-                    className="flex-1 text-[11px] py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400"
-                    loading={triageMutation.isPending}
-                  >
-                    Record Vitals
-                  </Button>
+                <div className="flex flex-col gap-2 pt-2">
+                  <div className="flex gap-2">
+                    <Button
+                      type="submit"
+                      className="flex-1 text-[11px] py-1.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400"
+                      loading={triageMutation.isPending}
+                    >
+                      Record Vitals
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      className="flex-1 text-[11px] py-1.5 border border-slate-850 hover:bg-slate-900"
+                      onClick={() => setTriageForm({
+                        bp: '122/81',
+                        hr: '74',
+                        temp: '98.8',
+                        bmi: '23.0'
+                      })}
+                    >
+                      Mock Vitals
+                    </Button>
+                  </div>
                   <Button
                     type="button"
-                    variant="secondary"
-                    className="text-[11px] py-1.5"
+                    variant="glass"
+                    className="w-full text-[11px] py-1.5 border border-slate-800 text-slate-400 hover:text-slate-200"
                     onClick={() => setTriageApptId(null)}
                   >
                     Cancel
