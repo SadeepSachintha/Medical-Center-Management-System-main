@@ -21,7 +21,7 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 * **Queue Token**: A unique 3-digit number (like `101`, `102`) assigned to a patient when they arrive. This helps them know their order in the waiting lounge.
 * **Triage Vitals**: Basic medical readings taken by the receptionist or nurse before the patient sees the doctor. This includes **Blood Pressure** (e.g., 120/80), **Heart Rate** (heartbeats per minute), **Body Temperature** (in degrees Fahrenheit), and **BMI** (body size index).
 * **EHR (Electronic Health Record)**: A patient's digital medical file where doctors log consultation notes, diagnoses, and medications.
-* **OTC Direct Sale**: "Over-the-Counter" sale of medicine straight to a customer who walked in just to buy medicine without seeing a doctor.
+* **Live Network Status**: A color-coded network pill in the upper-right header. Green **"SMTP Cloud Online"** means an internet connection is active and automated patient emails are enabled. Amber **"Offline Standalone Mode"** means you are disconnected; the system will continue to work perfectly, storing files locally and bypassing email dispatch without any lagging or freezes.
 
 ---
 
@@ -32,31 +32,43 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 1. Click **New Patient Intake** in the left sidebar menu.
 2. Fill out the registration form:
    - Type the patient's **Full Name**, **Phone Number**, and **Date of Birth**.
+   - Type the patient's **Email Address** (Optional - necessary if they wish to receive automated discharge summary and payment receipt emails).
    - Enter their **National ID** (NID number).
    - List any **Medication Allergies** (type "None" if they don't have any).
    - Enter relevant **Medical History** (e.g., Asthma, Hypertension).
 3. Click the **Register Patient File** button. A green checkmark confirms the file is saved.
 
-### B. Giving a Patient a Queue Number (Token)
+### B. Giving a Patient a Queue Number (Token) & Roster Checks
 1. Click **Queue Scheduler** in the left sidebar.
-2. In the **Allocate Queue Token** search box, type the patient's name or phone number.
-3. Click on the correct patient from the drop-down list.
-4. Review the details and click **Generate Sequential Token**.
-5. A blue alert bar will appear at the top. Click **Print Ticket (80mm)**. This prints a small slip on your front desk receipt printer to hand to the patient.
+2. In the **Allocate Queue Token** search box, search the patient by name or phone and select them.
+3. Choose the **Attending Doctor** from the dropdown menu.
+4. Select the **Visit Category** (Walk-in vs. Scheduled Appointment).
+5. **Roster Status Validation**: If the selected doctor is off-duty today or has a registered vacation override on the calendar, a warning banner will appear: **"Doctor Unavailable Now: On leave"** and token generation will be disabled. You must choose another physician or consult the supervisor.
+6. If the doctor is available, click **Generate Sequential Token**. 
+7. A blue alert bar will appear. Click **Print Ticket (80mm)** to print the slip.
+8. **Automated Confirmation Email**: If the patient registered a valid email, they will automatically receive a queue confirmation email containing their token number and estimated appointment slot.
 
-### C. Nurse Vitals Triage
+### C. Cancelling a Token
+1. If a patient leaves the waiting area or booked by error, locate their active token in the scheduler table.
+2. Click the red **Cancel** button on their row.
+3. This voids their token and any outstanding invoice balances. An automated **Cancellation Email** is sent to their address to notify them.
+
+### D. Nurse Vitals Triage
 1. On the **Queue Scheduler** table, locate the patient. You will see a flashing orange **"Pending Triage"** notice.
 2. Click **Triage Nurse** next to their name. A form will open.
 3. Enter their vitals (Blood Pressure, Heart Rate, Temperature, BMI).
 4. Click **Record Vitals**. The flashing warning turns into green badges showing the vitals to the doctor.
 
-### D. Payments & Billing desk
+### E. Payments & Billing Desk
 1. Click **Billing Desk** in the left sidebar.
 2. Locate the patient in the billing table (marked with a flashing red **"unpaid"** status).
 3. Click **Collect Fee**.
 4. In the checkout window, choose the payment method: **Cash**, **Card**, **Insurance**, or **QR Code**.
-5. Click **Finalize Checkout**.
-6. The status changes to a green **"paid"**. Click the **Receipt** button to print the billing receipt layout for the patient.
+5. Click **Finalize Checkout**. The status changes to a green **"paid"**. 
+6. **Automated Discharge Emails**: The system automatically compiles two PDF files in the background and emails them as attachments:
+   - **Payment_Receipt.pdf**: Itemized checkout ledger with paid status and barcode matching the ID.
+   - **Medical_Discharge_Summary.pdf**: Diagnoses, vital logs, and electronic prescription (Rx) instructions.
+7. Click the **Receipt** button if they need a physical copy printed.
 
 ---
 
@@ -120,13 +132,28 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
    - Select their specialty or department.
 3. Click **Provision Credentials**. They can now log in using those details.
 
-### B. Exporters & Data Backups (Air-Gap Protection)
-Because our system runs locally on your clinic computer, you have full control over backups to protect against hardware failure:
+### B. Doctor Profiles, Weekly Rosters, & Leave Overrides
+You configure details and work calendars for doctors:
+1. Click **User Accounts** in the sidebar.
+2. Click the tab at the top labeled **Doctor Profiles & Roster**.
+3. Select a doctor from the list.
+4. Edit their **Room Assignment Assignment**, **Consultation Fee (LKR)**, and professional **Bio** text.
+5. In the **Weekly Availability Calendar**, check or uncheck active days, and set their shift Start/End times (e.g. `09:00 - 18:00`).
+6. In **Vacation & Time-Off Blocks**, choose calendar dates they will be away (e.g., `2026-08-05`), add a reason (e.g. "Annual Leave"), and click **Add Block**. 
+7. Click **Save Doctor Details** to write scheduling rules to the server database.
+
+### C. Clinic Reports & Financial Analytics
+Navigate to **Financial Analytics** in the sidebar. The panel is split into three interactive reports:
+1. **Clinic Revenue & Ledger**: View total clinic earnings, average ticket sizes, cashflow timeline graphs, payment distribution splits (Cash, Card, Insurance, QR Code), and the raw transaction ledger table.
+2. **Patient Footfall Reports**: Analyze total ticket admissions, split comparison between walk-in customers and scheduled appointments, peak load clinic hours (bar chart representing the busiest hours of the day), and cancellation rates.
+3. **Doctor Performance Panel**: Chart consultations completed per physician and view an administrative table detailing specialties, room numbers, consult fees, and consultation revenue generated per doctor.
+
+### D. Exporters & Data Backups (Air-Gap Protection)
+Because our system runs locally on your clinic computer, you have full control over backups:
 1. Click **User Accounts** in the sidebar.
 2. Click the tab at the top labeled **Turnkey Backup & Maintenance**.
 3. Under **Manual Export**, click the blue **Export db.json Snapshot** button.
-4. A database file will immediately download to your computer (e.g., `aura_mcms_backup_2026-07-31.json`). **Save this file onto a USB thumb drive daily**.
-5. Observe the **Automated Backups Logs** on the right side of the screen to confirm the system performed its scheduled automatic nightly backups.
+4. A database file will immediately download to your computer. Save this file onto a USB thumb drive daily.
 
 ---
 
@@ -138,5 +165,5 @@ Because our system runs locally on your clinic computer, you have full control o
 #### Q: How do we scan medication boxes with barcodes?
 * **A**: Simply plug in a standard USB barcode scanner. Make sure your cursor is focused in the dashboard browser window, scan the medication barcode, and it will be added to the shopping cart instantly.
 
-#### Q: The system says "Low Stock" for some drugs.
-* **A**: This is an automated warning. Please purchase additional stock and log it using the **Add Medication** form to clear the warning.
+#### Q: How can we configure our own email SMTP server (like Gmail or SES)?
+* **A**: Locate the `server/config.json` file in the project folder and edit the SMTP details (host, port, auth user, pass, and from address) to match your email provider. The system will start sending emails via your provider immediately after you save.
