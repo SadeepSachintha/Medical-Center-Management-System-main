@@ -116,3 +116,9 @@ The login screen provides quick demo profiles. Clicking any card pre-fills crede
 ## 6. End-User Manual
 
 For clinical staff instructions, steps on registration, vital triages, and prescriptions, refer directly to the [USER_MANUAL.md](file:///d:/xampp/htdocs/Medical-Center-Management-System-main/Medical-Center-Management-System-main/USER_MANUAL.md) file.
+
+---
+
+## 7. Academic Evaluation & Technical Architecture
+
+For detailed software engineering documentation, system component topologies, JSON database schemas, concurrency locking algorithms, and regulatory compliance (HIPAA, RBAC) details, refer directly to the **[ARCHITECTURE.md](file:///D:/xampp/htdocs/Medical-Center-Management-System-main/ARCHITECTURE.md)** file in the project root.

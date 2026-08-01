@@ -13,7 +13,8 @@ import {
   TrendingUp, 
   Stethoscope, 
   Calendar,
-  AlertCircle
+  AlertCircle,
+  Download
 } from 'lucide-react';
 
 export function FinancialAnalytics() {
@@ -161,6 +162,29 @@ export function FinancialAnalytics() {
     };
   });
 
+  // Local Offline CSV Downloader helper
+  const downloadCSV = (data: any[], headersMap: { [key: string]: string }, filename: string) => {
+    if (!data || data.length === 0) return;
+    const keys = Object.keys(headersMap);
+    const headerRow = keys.map(k => headersMap[k]).join(',');
+    const rows = data.map(row => 
+      keys.map(key => {
+        let val = row[key];
+        if (val === undefined || val === null) return '""';
+        const strVal = String(val).replace(/"/g, '""');
+        return `"${strVal}"`;
+      }).join(',')
+    );
+    const csvContent = '\uFEFF' + [headerRow, ...rows].join('\n'); // Add UTF-8 BOM
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${filename}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="p-6 space-y-6 animate-fade-in-up">
       {/* Sub Tabs Selection */}
@@ -266,10 +290,33 @@ export function FinancialAnalytics() {
 
               {/* Table ledger */}
               <Card className="border-slate-800 bg-slate-900/60 p-5" hoverEffect={false}>
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <Receipt className="h-4.5 w-4.5 text-slate-400" />
-                  Financial Ledger Records
-                </h3>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <Receipt className="h-4.5 w-4.5 text-slate-400" />
+                    Financial Ledger Records
+                  </h3>
+                  
+                  <button
+                    onClick={() => {
+                      const exportData = paidInvoices.map((inv: any) => ({
+                        date: new Date(inv.date).toLocaleDateString() + ' ' + new Date(inv.date).toLocaleTimeString(undefined, {hour:'2-digit', minute:'2-digit'}),
+                        id: inv.id,
+                        patientName: inv.patientName,
+                        paymentMethod: inv.paymentMethod,
+                        total: inv.total
+                      }));
+                      downloadCSV(
+                        exportData, 
+                        { date: 'Date Settled', id: 'Receipt Reference', patientName: 'Patient Details', paymentMethod: 'Settlement Mode', total: 'Settled Amount (LKR)' },
+                        'MCMS_Financial_Ledger'
+                      );
+                    }}
+                    className="px-2.5 py-1 text-[10px] font-bold border border-medical-500 bg-medical-950/20 text-medical-300 hover:text-white rounded flex items-center gap-1.5 transition-all"
+                  >
+                    <Download className="h-3 w-3" />
+                    Download Ledger (CSV)
+                  </button>
+                </div>
 
                 <div className="overflow-x-auto no-scrollbar max-h-[300px] overflow-y-auto">
                   <table className="w-full text-left text-xs border-collapse">
@@ -404,10 +451,26 @@ export function FinancialAnalytics() {
 
               {/* performance details table */}
               <Card className="border-slate-800 bg-slate-900/60 p-5" hoverEffect={false}>
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <Users className="h-4.5 w-4.5 text-slate-400" />
-                  Physician Performance & Roster Details
-                </h3>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <Users className="h-4.5 w-4.5 text-slate-400" />
+                    Physician Performance & Roster Details
+                  </h3>
+                  
+                  <button
+                    onClick={() => {
+                      downloadCSV(
+                        docPerformanceTable, 
+                        { name: 'Physician Name', specialty: 'Specialization', roomNumber: 'Room Assignment', consultationsCount: 'Consultations Completed', consultationFee: 'Consultation Fee (LKR)', revenueGenerated: 'Consultation Revenue Generated (LKR)' },
+                        'MCMS_Doctor_Performance'
+                      );
+                    }}
+                    className="px-2.5 py-1 text-[10px] font-bold border border-emerald-500 bg-emerald-950/20 text-emerald-350 hover:text-white rounded flex items-center gap-1.5 transition-all"
+                  >
+                    <Download className="h-3 w-3" />
+                    Download Performance (CSV)
+                  </button>
+                </div>
 
                 <div className="overflow-x-auto no-scrollbar">
                   <table className="w-full text-left text-xs border-collapse">

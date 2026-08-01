@@ -163,6 +163,12 @@ Navigate to **Financial Analytics** in the sidebar. The panel is split into thre
 2. **Patient Footfall Reports**: Analyze total ticket admissions, split comparison between walk-in customers and scheduled appointments, peak load clinic hours (bar chart representing the busiest hours of the day), and cancellation rates.
 3. **Doctor Performance Panel**: Chart consultations completed per physician and view an administrative table detailing specialties, room numbers, consult fees, and consultation revenue generated per doctor.
 
+#### Downloadable Spreadsheet Reports (CSV)
+You can download raw data directly from the system for accounting, supervisor review, or audit analysis:
+* In **Clinic Revenue & Ledger**, click the blue **Download Ledger (CSV)** button on the header of the ledger table to save a `.csv` spreadsheet file containing dates, references, patients, settlement modes, and amounts.
+* In **Doctor Performance Panel**, click the green **Download Performance (CSV)** button on the table header to download a `.csv` file detailing doctors, consultation counts, room numbers, fees, and consultation revenue generated.
+* These files are compiled locally (works fully offline) and can be imported directly into Microsoft Excel, Google Sheets, or LibreOffice Calc.
+
 ### D. Exporters & Data Backups (Air-Gap Protection)
 Because our system runs locally on your clinic computer, you have full control over backups:
 1. Click **User Accounts** in the sidebar.

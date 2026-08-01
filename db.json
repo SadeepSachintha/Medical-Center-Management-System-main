@@ -327,7 +327,7 @@
       "tokenNumber": "106",
       "date": "2026-08-01T15:20:00.000Z",
       "type": "walk-in",
-      "status": "waiting",
+      "status": "in-consultation",
       "triage": {
         "bp": "122/81",
         "hr": "74",
@@ -886,6 +886,38 @@
       "role": "receptionist",
       "action": "Invoice Checkout",
       "details": "Processed payment for invoice inv-856489 via Insurance"
+    },
+    {
+      "id": "l-557280",
+      "timestamp": "2026-08-01T16:46:15.740Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-142153",
+      "timestamp": "2026-08-01T16:48:28.468Z",
+      "username": "admin",
+      "role": "admin",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-783487",
+      "timestamp": "2026-08-01T16:49:43.016Z",
+      "username": "doctor",
+      "role": "doctor",
+      "action": "User Login",
+      "details": "Successfully logged into MCMS"
+    },
+    {
+      "id": "l-569086",
+      "timestamp": "2026-08-01T16:49:55.115Z",
+      "username": "Dr. Evelyn Carter",
+      "role": "doctor",
+      "action": "Call Patient",
+      "details": "Called Patient Jane Smith (Token 106) to consult room"
     }
   ]
 }
