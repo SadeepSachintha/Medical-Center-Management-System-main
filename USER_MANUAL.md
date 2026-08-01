@@ -16,7 +16,22 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 
 ---
 
-## 2. Core Concepts You Need to Know
+## 2. How to Launch and Open the System
+
+Launching the clinic software is simple and does not require opening developers' consoles or typing terminal commands:
+
+1. **Locate the Project Folder**: Navigate to the directory where the Aura Medical Center Management System is installed on your computer.
+2. **Double-Click the Launcher File**: Look for the file named **`launch_mcms.bat`** (it has a gears icon on Windows and may just show as `launch_mcms`).
+3. **Wait for Startup**: A black console window will open, automatically checking if Node.js is ready and starting both the backend database server and the client portal. 
+4. **Auto-Open Web Browser**: Within 2 to 4 seconds, the clinic login screen will **automatically open in your default web browser** at `http://localhost:5173`.
+5. **Shutting Down the System**: When your daily clinic operations are finished, simply click the standard **"X" close button** on the top-right of the black console launcher window.
+
+> [!IMPORTANT]
+> You **must keep the black console window open** while using the software. If you close this launcher window, the database server will turn off and the web pages will stop loading.
+
+---
+
+## 3. Core Concepts You Need to Know
 
 * **Queue Token**: A unique 3-digit number (like `101`, `102`) assigned to a patient when they arrive. This helps them know their order in the waiting lounge.
 * **Triage Vitals**: Basic medical readings taken by the receptionist or nurse before the patient sees the doctor. This includes **Blood Pressure** (e.g., 120/80), **Heart Rate** (heartbeats per minute), **Body Temperature** (in degrees Fahrenheit), and **BMI** (body size index).
@@ -25,7 +40,7 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 
 ---
 
-## 3. Daily Guide for Receptionists & Front Desk Staff
+## 4. Daily Guide for Receptionists & Front Desk Staff
 *Your primary login username is **`receptionist`** with password **`reception123`**.*
 
 ### A. Registering a New Patient
@@ -66,13 +81,13 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 4. In the checkout window, choose the payment method: **Cash**, **Card**, **Insurance**, or **QR Code**.
 5. Click **Finalize Checkout**. The status changes to a green **"paid"**. 
 6. **Automated Discharge Emails**: The system automatically compiles two PDF files in the background and emails them as attachments:
-   - **Payment_Receipt.pdf**: Itemized checkout ledger with paid status and barcode matching the ID.
-   - **Medical_Discharge_Summary.pdf**: Diagnoses, vital logs, and electronic prescription (Rx) instructions.
+   - **Payment_Receipt.pdf**: Detailed financial statement and itemized checkout ledger (PAID).
+   - **Medical_Discharge_Summary.pdf**: Clinical chart notes, vital logs, and electronic prescription (Rx) sheet.
 7. Click the **Receipt** button if they need a physical copy printed.
 
 ---
 
-## 4. Daily Guide for Doctors
+## 5. Daily Guide for Doctors
 *Your primary login username is **`doctor`** with password **`doctor123`**.*
 
 ### A. Calling the Next Patient
@@ -95,7 +110,7 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 
 ---
 
-## 5. Daily Guide for Pharmacists
+## 6. Daily Guide for Pharmacists
 *Your primary login username is **`pharmacist`** with password **`pharmacy123`**.*
 
 ### A. Dispensing Doctor Prescriptions
@@ -121,7 +136,7 @@ Our system replaces manual paper files and clipboard queues with a fast, real-ti
 
 ---
 
-## 6. Daily Guide for Clinic Managers & Administrators
+## 7. Daily Guide for Clinic Managers & Administrators
 *Your primary login username is **`admin`** with password **`admin123`**.*
 
 ### A. Adding Staff User Accounts
@@ -137,7 +152,7 @@ You configure details and work calendars for doctors:
 1. Click **User Accounts** in the sidebar.
 2. Click the tab at the top labeled **Doctor Profiles & Roster**.
 3. Select a doctor from the list.
-4. Edit their **Room Assignment Assignment**, **Consultation Fee (LKR)**, and professional **Bio** text.
+4. Edit their **Room Assignment**, **Consultation Fee (LKR)**, and professional **Bio** text.
 5. In the **Weekly Availability Calendar**, check or uncheck active days, and set their shift Start/End times (e.g. `09:00 - 18:00`).
 6. In **Vacation & Time-Off Blocks**, choose calendar dates they will be away (e.g., `2026-08-05`), add a reason (e.g. "Annual Leave"), and click **Add Block**. 
 7. Click **Save Doctor Details** to write scheduling rules to the server database.
@@ -157,7 +172,7 @@ Because our system runs locally on your clinic computer, you have full control o
 
 ---
 
-## 7. Troubleshooting FAQ
+## 8. Troubleshooting FAQ
 
 #### Q: The waiting room speaker is not announcing patient tokens.
 * **A**: Web browsers block sounds unless you click on the page first. Ensure you have clicked once anywhere on the **Waiting Room display board** to enable the voice synthesis. Also check that your computer speakers are turned on and not muted.
