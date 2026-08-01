@@ -13,7 +13,21 @@ export function Header({ currentTab }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const goOnline = () => setIsOnline(true);
+    const goOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', goOnline);
+    window.addEventListener('offline', goOffline);
+
+    return () => {
+      window.removeEventListener('online', goOnline);
+      window.removeEventListener('offline', goOffline);
+    };
+  }, []);
 
   const getPageTitle = () => {
     switch (currentTab) {
@@ -83,6 +97,16 @@ export function Header({ currentTab }: HeaderProps) {
               </kbd>
             </button>
           )}
+
+          {/* Network Status Pill */}
+          <div className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[11px] font-medium transition-all ${
+            isOnline 
+              ? 'bg-emerald-950/20 border-emerald-900/60 text-emerald-400' 
+              : 'bg-amber-950/20 border-amber-900/60 text-amber-500'
+          }`}>
+            <span className={`h-1.5 w-1.5 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500 animate-pulse'}`} />
+            <span>{isOnline ? 'SMTP Cloud Online' : 'Offline Standalone Mode'}</span>
+          </div>
 
           {/* Current Date Capsule */}
           <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/50 border border-slate-850 text-slate-300 text-[11px] font-medium">
