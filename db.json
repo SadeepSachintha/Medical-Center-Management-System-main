@@ -14,7 +14,54 @@
       "username": "doctor",
       "password": "doctor123",
       "role": "doctor",
-      "specialty": "General Medicine"
+      "specialty": "General Medicine",
+      "roomNumber": "Room 101",
+      "consultationFee": 2000,
+      "bio": "Senior consultant in General Medicine with 10+ years of clinical experience. Specializes in chronic care and internal medicine.",
+      "roster": {
+        "Monday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Tuesday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Wednesday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Thursday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Friday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Saturday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "23:00"
+        },
+        "Sunday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        }
+      },
+      "overrides": [
+        {
+          "id": "ov-1",
+          "date": "2026-08-15",
+          "reason": "Medical Conference"
+        }
+      ]
     },
     {
       "id": "u-3",
@@ -31,6 +78,104 @@
       "password": "pharmacy123",
       "role": "pharmacist",
       "specialty": "Pharmacy Operations"
+    },
+    {
+      "id": "u-5",
+      "name": "Dr. Marcus Vance",
+      "username": "mvance",
+      "password": "doctor123",
+      "role": "doctor",
+      "specialty": "Cardiology",
+      "roomNumber": "Room 105",
+      "consultationFee": 2500,
+      "bio": "Consultant Cardiologist. Expert in cardiovascular health, echocardiography, and preventive care.",
+      "roster": {
+        "Monday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Tuesday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Wednesday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        },
+        "Thursday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Friday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        },
+        "Saturday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "23:00"
+        },
+        "Sunday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        }
+      },
+      "overrides": []
+    },
+    {
+      "id": "u-6",
+      "name": "Dr. Sophia Chen",
+      "username": "schen",
+      "password": "doctor123",
+      "role": "doctor",
+      "specialty": "Pediatrics",
+      "roomNumber": "Room 103",
+      "consultationFee": 1800,
+      "bio": "Specialist in Pediatric Care and child health development. Focuses on gentle therapy and comprehensive wellness.",
+      "roster": {
+        "Monday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        },
+        "Tuesday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        },
+        "Wednesday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Thursday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        },
+        "Friday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "18:00"
+        },
+        "Saturday": {
+          "active": true,
+          "startTime": "09:00",
+          "endTime": "23:00"
+        },
+        "Sunday": {
+          "active": false,
+          "startTime": "09:00",
+          "endTime": "17:00"
+        }
+      },
+      "overrides": []
     }
   ],
   "patients": [
@@ -39,6 +184,7 @@
       "nationalId": "NID-9988-77",
       "name": "John Doe",
       "phone": "1234567890",
+      "email": "john.doe@example.com",
       "dob": "1988-05-12",
       "gender": "Male",
       "allergies": "Penicillin",
@@ -49,10 +195,65 @@
       "nationalId": "NID-1122-33",
       "name": "Jane Smith",
       "phone": "0987654321",
+      "email": "jane.smith@example.com",
       "dob": "1992-09-24",
       "gender": "Female",
       "allergies": "None",
       "history": "Mild asthma, seasonal allergies. Inhaler as needed."
+    },
+    {
+      "id": "p-3",
+      "nationalId": "NID-4455-66",
+      "name": "Robert Taylor",
+      "phone": "0771234567",
+      "email": "robert.taylor@example.com",
+      "dob": "1975-11-02",
+      "gender": "Male",
+      "allergies": "Sulfa Drugs",
+      "history": "Type 2 Diabetes since 2018. Active lifestyle."
+    },
+    {
+      "id": "p-4",
+      "nationalId": "NID-7788-99",
+      "name": "Emily Watson",
+      "phone": "0777654321",
+      "email": "emily.watson@example.com",
+      "dob": "2001-04-18",
+      "gender": "Female",
+      "allergies": "None",
+      "history": "Seasonal hay fever, otherwise healthy."
+    },
+    {
+      "id": "p-725040",
+      "name": "Test Verify Patient",
+      "phone": "0779998887",
+      "dob": "1995-10-10",
+      "gender": "Male",
+      "nationalId": "NID-9999-99",
+      "allergies": "None",
+      "history": "Healthy test verification profile."
+    },
+    {
+      "id": "p-166666",
+      "name": "Test Verify Patient",
+      "phone": "0779997856",
+      "email": "mcms.verify@example.com",
+      "dob": "1995-10-10",
+      "gender": "Male",
+      "nationalId": "NID-9999-7856",
+      "allergies": "None",
+      "history": "Healthy test verification profile."
+    },
+    {
+      "id": "p-568142",
+      "name": "Test Verify Patient",
+      "phone": "0779996273",
+      "email": "mcms.verify@example.com",
+      "dob": "1995-10-10",
+      "gender": "Male",
+      "nationalId": "NID-9999-6273",
+      "allergies": "None",
+      "history": "Healthy test verification profile."
     }
   ],
   "appointments": [
@@ -61,7 +262,8 @@
       "patientId": "p-1",
       "doctorId": "u-2",
       "tokenNumber": "101",
-      "date": "2026-07-31T09:00:00.000Z",
+      "date": "2026-07-30T09:15:00.000Z",
+      "type": "walk-in",
       "status": "completed"
     },
     {
@@ -69,14 +271,129 @@
       "patientId": "p-2",
       "doctorId": "u-2",
       "tokenNumber": "102",
-      "date": "2026-07-31T09:30:00.000Z",
-      "status": "waiting",
+      "date": "2026-07-30T10:30:00.000Z",
+      "type": "scheduled",
+      "status": "completed",
       "triage": {
         "bp": "120/80",
         "hr": "72",
         "temp": "98.6",
         "bmi": "22.5"
       }
+    },
+    {
+      "id": "a-3",
+      "patientId": "p-3",
+      "doctorId": "u-5",
+      "tokenNumber": "103",
+      "date": "2026-07-31T11:00:00.000Z",
+      "type": "scheduled",
+      "status": "completed",
+      "triage": {
+        "bp": "130/85",
+        "hr": "80",
+        "temp": "98.4",
+        "bmi": "27.1"
+      }
+    },
+    {
+      "id": "a-4",
+      "patientId": "p-4",
+      "doctorId": "u-6",
+      "tokenNumber": "104",
+      "date": "2026-07-31T14:45:00.000Z",
+      "type": "walk-in",
+      "status": "completed",
+      "triage": {
+        "bp": "115/75",
+        "hr": "68",
+        "temp": "99.1",
+        "bmi": "20.8"
+      }
+    },
+    {
+      "id": "a-5",
+      "patientId": "p-1",
+      "doctorId": "u-5",
+      "tokenNumber": "105",
+      "date": "2026-08-01T10:00:00.000Z",
+      "type": "scheduled",
+      "status": "cancelled"
+    },
+    {
+      "id": "a-6",
+      "patientId": "p-2",
+      "doctorId": "u-2",
+      "tokenNumber": "106",
+      "date": "2026-08-01T15:20:00.000Z",
+      "type": "walk-in",
+      "status": "waiting",
+      "triage": {
+        "bp": "122/81",
+        "hr": "74",
+        "temp": "98.8",
+        "bmi": "23.0"
+      }
+    },
+    {
+      "id": "a-322433",
+      "patientId": "p-725040",
+      "doctorId": "u-5",
+      "tokenNumber": "103",
+      "date": "2026-08-01T16:09:39.255Z",
+      "status": "waiting",
+      "triage": null,
+      "type": "scheduled"
+    },
+    {
+      "id": "a-439622",
+      "patientId": "p-725040",
+      "doctorId": "u-5",
+      "tokenNumber": "104",
+      "date": "2026-08-01T16:09:39.263Z",
+      "status": "cancelled",
+      "triage": null,
+      "type": "walk-in"
+    },
+    {
+      "id": "a-410770",
+      "patientId": "p-166666",
+      "doctorId": "u-5",
+      "tokenNumber": "105",
+      "date": "2026-08-01T16:10:40.114Z",
+      "status": "waiting",
+      "triage": null,
+      "type": "scheduled"
+    },
+    {
+      "id": "a-220231",
+      "patientId": "p-166666",
+      "doctorId": "u-5",
+      "tokenNumber": "106",
+      "date": "2026-08-01T16:10:40.163Z",
+      "status": "cancelled",
+      "triage": null,
+      "type": "walk-in"
+    },
+    {
+      "id": "a-298987",
+      "patientId": "p-568142",
+      "doctorId": "u-5",
+      "tokenNumber": "107",
+      "date": "2026-08-01T16:11:44.656Z",
+      "status": "waiting",
+      "triage": null,
+      "type": "scheduled"
+    },
+    {
+      "id": "a-645450",
+      "patientId": "p-568142",
+      "doctorId": "u-5",
+      "tokenNumber": "108",
+      "date": "2026-08-01T16:11:44.707Z",
+      "status": "cancelled",
+      "triage": null,
+      "type": "walk-in"
     }
   ],
   "encounters": [
@@ -85,7 +402,7 @@
       "appointmentId": "a-1",
       "patientId": "p-1",
       "doctorId": "u-2",
-      "date": "2026-07-31T09:15:00.000Z",
+      "date": "2026-07-30T09:30:00.000Z",
       "triage": {
         "bp": "135/85",
         "hr": "78",
@@ -94,6 +411,51 @@
       },
       "notes": "Patient reported mild headache. BP slightly elevated. Advised low salt diet and lifestyle adjustments. Follow up in 3 months.",
       "diagnosisCodes": "I10 (Essential Hypertension)"
+    },
+    {
+      "id": "e-2",
+      "appointmentId": "a-2",
+      "patientId": "p-2",
+      "doctorId": "u-2",
+      "date": "2026-07-30T10:50:00.000Z",
+      "triage": {
+        "bp": "120/80",
+        "hr": "72",
+        "temp": "98.6",
+        "bmi": "22.5"
+      },
+      "notes": "Routine checkup. Asthma managed well with occasional Albuterol inhaler. Chest clear.",
+      "diagnosisCodes": "J45.9 (Asthma, Unspecified)"
+    },
+    {
+      "id": "e-3",
+      "appointmentId": "a-3",
+      "patientId": "p-3",
+      "doctorId": "u-5",
+      "date": "2026-07-31T11:25:00.000Z",
+      "triage": {
+        "bp": "130/85",
+        "hr": "80",
+        "temp": "98.4",
+        "bmi": "27.1"
+      },
+      "notes": "Complained of slight chest discomfort during exertion. EKG done, minor ST segment changes. Recommend lifestyle modifications and specialist follow up.",
+      "diagnosisCodes": "I25.9 (Chronic Ischemic Heart Disease)"
+    },
+    {
+      "id": "e-4",
+      "appointmentId": "a-4",
+      "patientId": "p-4",
+      "doctorId": "u-6",
+      "date": "2026-07-31T15:10:00.000Z",
+      "triage": {
+        "bp": "115/75",
+        "hr": "68",
+        "temp": "99.1",
+        "bmi": "20.8"
+      },
+      "notes": "Presented with fever and mild sore throat. Throat red, no exudates. Diagnosed with viral pharyngitis. Rest and hydration.",
+      "diagnosisCodes": "J02.9 (Acute Pharyngitis, Unspecified)"
     }
   ],
   "prescriptions": [
@@ -102,12 +464,44 @@
       "encounterId": "e-1",
       "patientId": "p-1",
       "doctorId": "u-2",
-      "date": "2026-07-31T09:15:00.000Z",
+      "date": "2026-07-30T09:30:00.000Z",
       "items": [
         {
           "drugName": "Atorvastatin 10mg",
           "dosage": "1 tab",
           "frequency": "Once daily",
+          "duration": "30 days"
+        }
+      ],
+      "status": "dispensed"
+    },
+    {
+      "id": "pr-2",
+      "encounterId": "e-2",
+      "patientId": "p-2",
+      "doctorId": "u-2",
+      "date": "2026-07-30T10:50:00.000Z",
+      "items": [
+        {
+          "drugName": "Amoxicillin 500mg",
+          "dosage": "1 capsule",
+          "frequency": "Three times daily",
+          "duration": "7 days"
+        }
+      ],
+      "status": "dispensed"
+    },
+    {
+      "id": "pr-3",
+      "encounterId": "e-3",
+      "patientId": "p-3",
+      "doctorId": "u-5",
+      "date": "2026-07-31T11:25:00.000Z",
+      "items": [
+        {
+          "drugName": "Metformin 500mg",
+          "dosage": "1 tab",
+          "frequency": "Twice daily",
           "duration": "30 days"
         }
       ],
@@ -120,11 +514,11 @@
       "appointmentId": "a-1",
       "patientId": "p-1",
       "doctorId": "u-2",
-      "date": "2026-07-31T09:20:00.000Z",
+      "date": "2026-07-30T09:45:00.000Z",
       "items": [
         {
-          "name": "Doctor Consultation Fee",
-          "price": 1500,
+          "name": "Doctor Consultation Fee - Dr. Evelyn Carter",
+          "price": 2000,
           "type": "consultation"
         },
         {
@@ -133,9 +527,189 @@
           "type": "pharmacy"
         }
       ],
-      "total": 2400,
+      "total": 2900,
       "status": "paid",
       "paymentMethod": "Card"
+    },
+    {
+      "id": "inv-2",
+      "appointmentId": "a-2",
+      "patientId": "p-2",
+      "doctorId": "u-2",
+      "date": "2026-07-30T11:00:00.000Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Evelyn Carter",
+          "price": 2000,
+          "type": "consultation"
+        },
+        {
+          "name": "Amoxicillin 500mg (21 tabs)",
+          "price": 450,
+          "type": "pharmacy"
+        }
+      ],
+      "total": 2450,
+      "status": "paid",
+      "paymentMethod": "Cash"
+    },
+    {
+      "id": "inv-3",
+      "appointmentId": "a-3",
+      "patientId": "p-3",
+      "doctorId": "u-5",
+      "date": "2026-07-31T11:35:00.000Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        },
+        {
+          "name": "Metformin 500mg (60 tabs)",
+          "price": 600,
+          "type": "pharmacy"
+        }
+      ],
+      "total": 3100,
+      "status": "paid",
+      "paymentMethod": "Insurance"
+    },
+    {
+      "id": "inv-4",
+      "appointmentId": "a-4",
+      "patientId": "p-4",
+      "doctorId": "u-6",
+      "date": "2026-07-31T15:30:00.000Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Sophia Chen",
+          "price": 1800,
+          "type": "consultation"
+        }
+      ],
+      "total": 1800,
+      "status": "paid",
+      "paymentMethod": "QR Code"
+    },
+    {
+      "id": "inv-5",
+      "appointmentId": "a-5",
+      "patientId": "p-1",
+      "doctorId": "u-5",
+      "date": "2026-08-01T10:00:00.000Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "void",
+      "paymentMethod": ""
+    },
+    {
+      "id": "inv-806320",
+      "appointmentId": "a-322433",
+      "patientId": "p-725040",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:09:39.256Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "paid",
+      "paymentMethod": "Insurance"
+    },
+    {
+      "id": "inv-949124",
+      "appointmentId": "a-439622",
+      "patientId": "p-725040",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:09:39.264Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "void",
+      "paymentMethod": ""
+    },
+    {
+      "id": "inv-465480",
+      "appointmentId": "a-410770",
+      "patientId": "p-166666",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:10:40.115Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "paid",
+      "paymentMethod": "Insurance"
+    },
+    {
+      "id": "inv-296535",
+      "appointmentId": "a-220231",
+      "patientId": "p-166666",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:10:40.164Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "void",
+      "paymentMethod": ""
+    },
+    {
+      "id": "inv-856489",
+      "appointmentId": "a-298987",
+      "patientId": "p-568142",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:11:44.656Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "paid",
+      "paymentMethod": "Insurance"
+    },
+    {
+      "id": "inv-822132",
+      "appointmentId": "a-645450",
+      "patientId": "p-568142",
+      "doctorId": "u-5",
+      "date": "2026-08-01T16:11:44.708Z",
+      "items": [
+        {
+          "name": "Doctor Consultation Fee - Dr. Marcus Vance",
+          "price": 2500,
+          "type": "consultation"
+        }
+      ],
+      "total": 2500,
+      "status": "void",
+      "paymentMethod": ""
     }
   ],
   "inventory": [
@@ -179,14 +753,14 @@
   "audit_logs": [
     {
       "id": "l-1",
-      "timestamp": "2026-07-31T09:00:00.000Z",
+      "timestamp": "2026-07-30T09:00:00.000Z",
       "username": "receptionist",
       "role": "receptionist",
       "action": "Patient Intake",
       "details": "Registered John Doe into the system."
     },
     {
-      "id": "l-513870",
+      "id": "l-2",
       "timestamp": "2026-07-31T05:52:44.236Z",
       "username": "receptionist",
       "role": "receptionist",
@@ -194,12 +768,124 @@
       "details": "Successfully logged into MCMS"
     },
     {
-      "id": "l-798768",
-      "timestamp": "2026-07-31T05:53:09.236Z",
-      "username": "pharmacist",
-      "role": "pharmacist",
-      "action": "User Login",
-      "details": "Successfully logged into MCMS"
+      "id": "l-934738",
+      "timestamp": "2026-08-01T16:09:39.240Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Patient Registration",
+      "details": "Registered patient Test Verify Patient (ID: p-725040)"
+    },
+    {
+      "id": "l-788221",
+      "timestamp": "2026-08-01T16:09:39.257Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 103 to patient ID: p-725040"
+    },
+    {
+      "id": "l-401186",
+      "timestamp": "2026-08-01T16:09:39.264Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 104 to patient ID: p-725040"
+    },
+    {
+      "id": "l-342240",
+      "timestamp": "2026-08-01T16:09:39.271Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Appointment Cancelled",
+      "details": "Cancelled appointment token 104"
+    },
+    {
+      "id": "l-847464",
+      "timestamp": "2026-08-01T16:09:39.281Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Invoice Checkout",
+      "details": "Processed payment for invoice inv-806320 via Insurance"
+    },
+    {
+      "id": "l-818651",
+      "timestamp": "2026-08-01T16:10:40.101Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Patient Registration",
+      "details": "Registered patient Test Verify Patient (ID: p-166666)"
+    },
+    {
+      "id": "l-607615",
+      "timestamp": "2026-08-01T16:10:40.116Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 105 to patient ID: p-166666"
+    },
+    {
+      "id": "l-634263",
+      "timestamp": "2026-08-01T16:10:40.165Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 106 to patient ID: p-166666"
+    },
+    {
+      "id": "l-864168",
+      "timestamp": "2026-08-01T16:10:40.173Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Appointment Cancelled",
+      "details": "Cancelled appointment token 106"
+    },
+    {
+      "id": "l-311000",
+      "timestamp": "2026-08-01T16:10:40.218Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Invoice Checkout",
+      "details": "Processed payment for invoice inv-465480 via Insurance"
+    },
+    {
+      "id": "l-613924",
+      "timestamp": "2026-08-01T16:11:44.642Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Patient Registration",
+      "details": "Registered patient Test Verify Patient (ID: p-568142)"
+    },
+    {
+      "id": "l-617628",
+      "timestamp": "2026-08-01T16:11:44.657Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 107 to patient ID: p-568142"
+    },
+    {
+      "id": "l-422937",
+      "timestamp": "2026-08-01T16:11:44.708Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Token Allocation",
+      "details": "Assigned Token 108 to patient ID: p-568142"
+    },
+    {
+      "id": "l-933786",
+      "timestamp": "2026-08-01T16:11:44.716Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Appointment Cancelled",
+      "details": "Cancelled appointment token 108"
+    },
+    {
+      "id": "l-853397",
+      "timestamp": "2026-08-01T16:11:44.759Z",
+      "username": "receptionist",
+      "role": "receptionist",
+      "action": "Invoice Checkout",
+      "details": "Processed payment for invoice inv-856489 via Insurance"
     }
   ]
 }

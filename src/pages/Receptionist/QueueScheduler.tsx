@@ -23,6 +23,8 @@ export function QueueScheduler() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<any | null>(null);
   const [printToken, setPrintToken] = useState<any | null>(null);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string>('u-2');
+  const [apptType, setApptType] = useState<'walk-in' | 'scheduled'>('walk-in');
   
   // Triage state
   const [triageApptId, setTriageApptId] = useState<string | null>(null);
@@ -43,6 +45,61 @@ export function QueueScheduler() {
     }
   });
 
+  // Query: get doctor users
+  const { data: doctors = [] } = useQuery({
+    queryKey: ['doctorsList'],
+    queryFn: async () => {
+      const res = await fetch('/api/admin/users');
+      if (!res.ok) return [];
+      const users = await res.json();
+      return users.filter((u: any) => u.role === 'doctor');
+    }
+  });
+
+  const getDoctorAvailability = (doctor: any) => {
+    if (!doctor) return { status: true };
+    if (!doctor.roster) return { status: true };
+    
+    const date = new Date();
+    // 1. Check overrides
+    const dateString = date.toISOString().split('T')[0];
+    if (doctor.overrides && Array.isArray(doctor.overrides)) {
+      const override = doctor.overrides.find((o: any) => o.date === dateString);
+      if (override) {
+        return { status: false, reason: `On leave: ${override.reason || 'Time-off'}` };
+      }
+    }
+    
+    // 2. Check weekly roster
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayName = days[date.getDay()];
+    const rosterDay = doctor.roster[dayName];
+    
+    if (!rosterDay || !rosterDay.active) {
+      return { status: false, reason: `Not scheduled on ${dayName}` };
+    }
+    
+    // Check hours
+    const currentHours = date.getHours();
+    const currentMinutes = date.getMinutes();
+    const currentTimeVal = currentHours * 60 + currentMinutes;
+    
+    const [startH, startM] = rosterDay.startTime.split(':').map(Number);
+    const startTimeVal = startH * 60 + (startM || 0);
+    
+    const [endH, endM] = rosterDay.endTime.split(':').map(Number);
+    const endTimeVal = endH * 60 + (endM || 0);
+    
+    if (currentTimeVal < startTimeVal || currentTimeVal > endTimeVal) {
+      return { status: false, reason: `Outside working hours (${rosterDay.startTime} - ${rosterDay.endTime})` };
+    }
+    
+    return { status: true };
+  };
+
+  const activeDoctor = doctors.find((d: any) => d.id === selectedDoctorId) || doctors[0];
+  const availability = activeDoctor ? getDoctorAvailability(activeDoctor) : { status: true };
+
   // Query: active queue
   const { data: queue = [] } = useQuery({
     queryKey: ['appointmentsQueue'],
@@ -54,32 +111,63 @@ export function QueueScheduler() {
 
   // Mutation: Allocate Token
   const allocateTokenMutation = useMutation({
-    mutationFn: async (patientId: string) => {
-      // For demo, we allocate to Dr. Evelyn Carter (u-2)
+    mutationFn: async ({ patientId, docId, type }: { patientId: string, docId: string, type: string }) => {
       const res = await fetch('/api/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           patientId,
-          doctorId: 'u-2',
+          doctorId: docId,
+          type,
           auditUser: user?.username,
           auditRole: user?.role
         })
       });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to allocate token');
+      }
       return res.json();
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['appointmentsQueue'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboardStats'] });
+      queryClient.invalidateQueries({ queryKey: ['invoicesList'] });
+      const doc = doctors.find((d: any) => d.id === selectedDoctorId);
       if (selectedPatient) {
         setPrintToken({
           patientName: selectedPatient.name,
           tokenNumber: data.tokenNumber,
-          doctorName: 'Dr. Evelyn Carter',
+          doctorName: doc ? doc.name : 'Dr. Evelyn Carter',
           date: data.date
         });
       }
       setSelectedPatient(null);
       setSearchQuery('');
+    }
+  });
+
+  // Mutation: Cancel Appointment
+  const cancelApptMutation = useMutation({
+    mutationFn: async (apptId: string) => {
+      const res = await fetch(`/api/appointments/${apptId}/cancel`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          auditUser: user?.username,
+          auditRole: user?.role
+        })
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to cancel appointment');
+      }
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['appointmentsQueue'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboardStats'] });
+      queryClient.invalidateQueries({ queryKey: ['invoicesList'] });
     }
   });
 
@@ -104,7 +192,11 @@ export function QueueScheduler() {
   });
 
   const handleAllocate = (pId: string) => {
-    allocateTokenMutation.mutate(pId);
+    handleAllocateWithParams(pId);
+  };
+
+  const handleAllocateWithParams = (pId: string) => {
+    allocateTokenMutation.mutate({ patientId: pId, docId: selectedDoctorId, type: apptType });
   };
 
   const handleTriageSubmit = (e: React.FormEvent) => {
@@ -201,9 +293,51 @@ export function QueueScheduler() {
                       Allergies: {selectedPatient.allergies}
                     </p>
                   </div>
+
+                  {/* Doctor Selection */}
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Select Physician</label>
+                    <select
+                      value={selectedDoctorId}
+                      onChange={(e) => setSelectedDoctorId(e.target.value)}
+                      className="w-full px-2.5 py-1.5 text-xs glass-input font-bold"
+                    >
+                      {doctors.map((doc: any) => (
+                        <option key={doc.id} value={doc.id}>
+                          {doc.name} ({doc.specialty})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Queue Type Selector */}
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Visit Category</label>
+                    <select
+                      value={apptType}
+                      onChange={(e) => setApptType(e.target.value as any)}
+                      className="w-full px-2.5 py-1.5 text-xs glass-input font-bold"
+                    >
+                      <option value="walk-in">Walk-in Token</option>
+                      <option value="scheduled">Scheduled Appointment</option>
+                    </select>
+                  </div>
+
+                  {/* Roster Availability Warning */}
+                  {!availability.status && (
+                    <div className="p-3 rounded-lg border border-rose-500/30 bg-rose-950/25 text-rose-300 text-[11px] space-y-1">
+                      <div className="flex items-center gap-1.5 font-bold">
+                        <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                        <span>Doctor Unavailable Now</span>
+                      </div>
+                      <p className="text-[10px] text-rose-450">{availability.reason}</p>
+                    </div>
+                  )}
+
                   <Button
                     onClick={() => handleAllocate(selectedPatient.id)}
                     className="w-full text-xs py-1.5"
+                    disabled={!availability.status}
                     loading={allocateTokenMutation.isPending}
                   >
                     Generate Sequential Token
@@ -367,17 +501,32 @@ export function QueueScheduler() {
                         </td>
                         <td className="py-3 text-right">
                           {appt.status === 'waiting' && (
-                            <Button
-                              variant="glass"
-                              size="sm"
-                              className="text-[9px] px-2 py-1 border border-slate-800"
-                              onClick={() => {
-                                setTriageApptId(appt.id);
-                                if (appt.triage) setTriageForm(appt.triage);
-                              }}
-                            >
-                              Triage Nurse
-                            </Button>
+                            <div className="flex justify-end gap-1.5">
+                              <Button
+                                variant="glass"
+                                size="sm"
+                                className="text-[9px] px-2 py-0.5 border border-slate-800"
+                                onClick={() => {
+                                  setTriageApptId(appt.id);
+                                  if (appt.triage) setTriageForm(appt.triage);
+                                }}
+                              >
+                                Triage
+                              </Button>
+                              <Button
+                                variant="glass"
+                                size="sm"
+                                className="text-[9px] px-2 py-0.5 border border-rose-950 text-rose-400 hover:bg-rose-955/20"
+                                onClick={() => {
+                                  if (confirm(`Cancel token ${appt.tokenNumber} for ${appt.patientName}?`)) {
+                                    cancelApptMutation.mutate(appt.id);
+                                  }
+                                }}
+                                loading={cancelApptMutation.isPending}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
                           )}
                           {appt.status === 'completed' && (
                             <span className="text-[9px] text-emerald-400 font-bold flex items-center gap-1 justify-end">

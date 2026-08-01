@@ -10,6 +10,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar
 } from 'recharts';
 
 interface ChartProps {
@@ -41,7 +43,6 @@ export function RevenueAreaChart({ data, height = 280 }: ChartProps) {
 }
 
 export function PaymentMethodPieChart({ data, height = 280 }: ChartProps) {
-  // Vibrant theme colors
   const COLORS = ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa'];
   
   return (
@@ -74,3 +75,62 @@ export function PaymentMethodPieChart({ data, height = 280 }: ChartProps) {
     </div>
   );
 }
+
+// Generic Bar Chart wrapper
+interface BarChartProps extends ChartProps {
+  xKey?: string;
+  yKey?: string;
+  fillColor?: string;
+}
+
+export function ClinicBarChart({ data, height = 280, xKey = 'name', yKey = 'value', fillColor = '#0ea5e9' }: BarChartProps) {
+  return (
+    <div style={{ width: '100%', height }} className="no-scrollbar">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+          <XAxis dataKey={xKey} stroke="#64748b" fontSize={11} tickLine={false} />
+          <YAxis stroke="#64748b" fontSize={11} tickLine={false} allowDecimals={false} />
+          <Tooltip
+            contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '8px', color: '#f8fafc' }}
+          />
+          <Bar dataKey={yKey} fill={fillColor} radius={[4, 4, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+// Generic Pie Chart wrapper for other splits
+export function ClinicPieChart({ data, height = 280 }: ChartProps) {
+  const COLORS = ['#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+  return (
+    <div style={{ width: '100%', height }} className="no-scrollbar">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="45%"
+            innerRadius={55}
+            outerRadius={75}
+            paddingAngle={4}
+            dataKey="value"
+          >
+            {data.map((_, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip
+            contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '8px', color: '#f8fafc' }}
+          />
+          <Legend 
+            verticalAlign="bottom"
+            height={36}
+            formatter={(value) => <span className="text-slate-300 text-xs">{value}</span>} 
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+

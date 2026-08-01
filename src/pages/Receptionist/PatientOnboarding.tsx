@@ -9,6 +9,7 @@ export function PatientOnboarding() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     dob: '',
     gender: 'Male',
     nationalId: '',
@@ -49,6 +50,7 @@ export function PatientOnboarding() {
         setFormData({
           name: '',
           phone: '',
+          email: '',
           dob: '',
           gender: 'Male',
           nationalId: '',
@@ -133,6 +135,18 @@ export function PatientOnboarding() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="e.g. 1234567890"
+                  className="w-full px-3 py-2 text-xs glass-input"
+                />
+              </div>
+
+              {/* Email Address */}
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Email Address (Optional)</label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="e.g. patient@example.com"
                   className="w-full px-3 py-2 text-xs glass-input"
                 />
               </div>
